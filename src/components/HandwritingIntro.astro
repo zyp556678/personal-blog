@@ -12,13 +12,23 @@ iGlyph.s = [
   { ...iDot, d: iStem.d + iStem.a },
 ];
 
+// Caveat's "s" is stored bottom-to-top. Reverse the path so it is written
+// from the top down; its old nib stamp no longer lines up, so drop it.
+const sGlyph = handwritingFont.glyphData.s;
+const sStroke = sGlyph.s[0];
+sGlyph.s = [{
+  ...sStroke,
+  p: [...sStroke.p].reverse(),
+  n: undefined,
+}];
+
 // Generate the word once at build time: real stroke data, no runtime JS.
 const handwriting = textToSvg('Miles', handwritingFont, {
   fontSize: 220,
   mode: 'once',
   color: 'currentColor',
   pressure: 0,
-  speed: 0.8,
+  speed: 0.9,
   timing: { deferDots: false },
 });
 ---
@@ -39,9 +49,9 @@ const handwriting = textToSvg('Miles', handwritingFont, {
     if (!overlay) return;
 
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduced || sessionStorage.getItem('miles-intro-seen-v2') === '1') return;
+    if (reduced || sessionStorage.getItem('miles-intro-seen-v3') === '1') return;
 
-    sessionStorage.setItem('miles-intro-seen-v2', '1');
+    sessionStorage.setItem('miles-intro-seen-v3', '1');
     document.documentElement.classList.add('intro-active');
     requestAnimationFrame(() => overlay.classList.add('is-active'));
 
@@ -54,7 +64,7 @@ const handwriting = textToSvg('Miles', handwritingFont, {
       setTimeout(() => overlay.remove(), 700);
     };
 
-    const timer = setTimeout(finish, 3900);
+    const timer = setTimeout(finish, 3600);
     overlay.querySelector('[data-intro-skip]')?.addEventListener('click', () => {
       clearTimeout(timer);
       finish();
