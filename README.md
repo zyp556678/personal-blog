@@ -1,6 +1,6 @@
 # Miles Notes
 
-Miles Zhang的个人博客，基于 **Astro 5 + Markdown** 的纯静态站点。首页开场的手写动画由 [Tegaki](https://tegaki.ink/) 在构建期生成 SVG，不依赖运行时 JavaScript 或外部字体。
+Miles Zhang的个人博客，基于 **Astro 5 + Markdown** 的纯静态站点。首页开场的手写动画由 [Tegaki](https://tegaki.ink/) 在构建期生成 SVG，不依赖运行时 JavaScript 或外部字体；首页标题使用 Split Text 逐字入场，整站带轻量 Click Spark 点击火花。
 
 ## 本地开发
 

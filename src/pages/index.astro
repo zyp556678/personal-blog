@@ -6,6 +6,25 @@ import { getPublishedPosts } from '../lib/posts';
 
 const posts = await getPublishedPosts();
 const latest = posts.slice(0, 4);
+
+const heroTitleParts = [
+  { text: '记录技术、产品' },
+  { text: '', br: true },
+  { text: '与生活里' },
+  { text: '值得留下', accent: true },
+  { text: '的东西。' },
+];
+let heroCharIndex = 0;
+const heroChars = [];
+for (const part of heroTitleParts) {
+  if (part.br) {
+    heroChars.push({ br: true });
+    continue;
+  }
+  for (const char of Array.from(part.text)) {
+    heroChars.push({ char, accent: part.accent === true, index: heroCharIndex++ });
+  }
+}
 ---
 
 <BaseLayout
@@ -18,7 +37,21 @@ const latest = posts.slice(0, 4);
     <div class="shell hero-grid">
       <div>
         <p class="eyebrow">个人博客 <span class="dot">/</span> PERSONAL NOTES</p>
-        <h1>记录技术、产品<br />与生活里<em>值得留下</em>的东西。</h1>
+        <h1 class="hero-title split-title" aria-label="记录技术、产品与生活里值得留下的东西。">
+          <span aria-hidden="true">
+            {heroChars.map((item) =>
+              item.br ? (
+                <br />
+              ) : (
+                <span
+                  class:list={['split-char', item.accent && 'split-accent']}
+                  style={`--char-index:${item.index}`}
+                  set:text={item.char}
+                />
+              )
+            )}
+          </span>
+        </h1>
         <p class="hero-lede">
           我是 Miles Zhang，软件工程在读。这里记录项目复盘、技术笔记，以及日常里一些不成熟但真实的想法。
         </p>
