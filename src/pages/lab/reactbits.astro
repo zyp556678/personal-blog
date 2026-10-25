@@ -1,0 +1,333 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ReactBitsDemo from '../../components/reactbits/ReactBitsDemo.jsx';
+---
+
+<BaseLayout
+  title="Motion Lab"
+  description="Five React Bits motion effects, presented in the Miles Notes paper-and-ink style."
+>
+  <div class="rb-page">
+    <div class="shell">
+      <div class="rb-utility">
+        <a href="/">← BACK TO NOTES</a>
+        <span>REACT BITS / 05</span>
+      </div>
+      <ReactBitsDemo client:load />
+    </div>
+  </div>
+</BaseLayout>
+
+<style is:global>
+  .rb-page {
+    padding: 44px 0 88px;
+  }
+
+  .rb-utility {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 14px;
+    margin-bottom: 52px;
+    color: var(--ink-3);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+  }
+
+  .rb-utility a {
+    color: var(--ink-3);
+    text-decoration: none;
+  }
+
+  .rb-utility a:hover { color: var(--accent); }
+
+  .rb-demo { width: 100%; }
+
+  .rb-hero {
+    padding: 12px 0 76px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .rb-kicker,
+  .rb-card-index,
+  .rb-click-hint,
+  .rb-footer {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.13em;
+  }
+
+  .rb-kicker {
+    color: var(--accent);
+    margin: 0 0 20px;
+  }
+
+  .rb-kicker span { color: var(--ink-4); }
+
+  .rb-title {
+    max-width: 960px;
+    margin: 0;
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: clamp(56px, 8vw, 108px);
+    font-weight: 400;
+    line-height: 1.04;
+    letter-spacing: -0.045em;
+  }
+
+  .rb-lede {
+    max-width: 680px;
+    margin: 26px 0 0;
+    color: var(--ink-3);
+    font-family: var(--font-sans);
+    font-size: clamp(16px, 1.5vw, 20px);
+    line-height: 1.8;
+  }
+
+  .rb-section {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: 56px;
+    padding: 62px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .rb-section-head {
+    position: sticky;
+    top: 92px;
+    display: flex;
+    align-self: start;
+    gap: 14px;
+  }
+
+  .rb-index {
+    padding-top: 3px;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+  }
+
+  .rb-name {
+    margin: 0 0 9px;
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: 23px;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+
+  .rb-note {
+    max-width: 220px;
+    margin: 0;
+    color: var(--ink-3);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  .rb-stage {
+    min-width: 0;
+  }
+
+  .rb-split-demo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 26px;
+  }
+
+  .rb-big-copy {
+    max-width: 720px;
+    margin: 0;
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: clamp(34px, 4.2vw, 60px);
+    font-weight: 400;
+    line-height: 1.14;
+    letter-spacing: -0.04em;
+  }
+
+  .rb-blur-copy {
+    display: flex;
+    max-width: 680px;
+    flex-wrap: wrap;
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: clamp(38px, 4.8vw, 70px);
+    line-height: 1.12;
+    letter-spacing: -0.045em;
+  }
+
+  .rb-replay {
+    border: 0;
+    border-bottom: 1px solid var(--line-strong);
+    padding: 0 0 3px;
+    background: transparent;
+    color: var(--ink-3);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    cursor: pointer;
+  }
+
+  .rb-replay:hover { color: var(--accent); border-color: var(--accent); }
+
+  .rb-fade-demo {
+    min-height: 240px;
+  }
+
+  .rb-quote-card {
+    position: relative;
+    min-height: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 42px 46px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+  }
+
+  .rb-quote-mark {
+    position: absolute;
+    top: 18px;
+    left: 30px;
+    color: var(--accent);
+    font-family: var(--font-display);
+    font-size: 84px;
+    line-height: 1;
+  }
+
+  .rb-quote-card p {
+    position: relative;
+    max-width: 550px;
+    margin: 0;
+    color: var(--ink-2);
+    font-family: var(--font-display);
+    font-size: clamp(21px, 2.2vw, 30px);
+    line-height: 1.5;
+  }
+
+  .rb-quote-by {
+    margin-top: 30px;
+    color: var(--ink-3);
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+  }
+
+  .rb-card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .rb-spot-card {
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #f4f1ea;
+    border-radius: 4px;
+  }
+
+  .rb-spot-card .rb-card-index { color: rgba(244, 241, 234, 0.52); }
+
+  .rb-spot-card h3 {
+    margin: 44px 0 12px;
+    color: #f4f1ea;
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 400;
+    letter-spacing: -0.025em;
+  }
+
+  .rb-spot-card p {
+    max-width: 290px;
+    margin: 0;
+    color: rgba(244, 241, 234, 0.62);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    line-height: 1.75;
+  }
+
+  .rb-spark-panel {
+    min-height: 280px;
+    overflow: hidden;
+    border: 1px solid var(--line-strong);
+    border-radius: 4px;
+    background: var(--surface);
+    color: var(--ink);
+    cursor: crosshair;
+  }
+
+  .rb-spark-inner {
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px 46px;
+  }
+
+  .rb-spark-inner .rb-card-index { color: var(--accent); }
+
+  .rb-spark-inner h3 {
+    margin: 18px 0 12px;
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: clamp(30px, 3vw, 46px);
+    font-weight: 400;
+    letter-spacing: -0.035em;
+  }
+
+  .rb-spark-inner p {
+    max-width: 420px;
+    margin: 0;
+    color: var(--ink-3);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    line-height: 1.75;
+  }
+
+  .rb-click-hint {
+    margin-top: 30px;
+    color: var(--accent);
+  }
+
+  .rb-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding-top: 28px;
+    color: var(--ink-3);
+  }
+
+  .rb-footer a {
+    color: var(--ink-3);
+    text-decoration: none;
+  }
+
+  .rb-footer a:hover { color: var(--accent); }
+
+  @media (max-width: 820px) {
+    .rb-page { padding-top: 28px; }
+    .rb-utility { margin-bottom: 36px; }
+    .rb-hero { padding-bottom: 52px; }
+    .rb-section { grid-template-columns: 1fr; gap: 28px; padding: 46px 0; }
+    .rb-section-head { position: static; }
+    .rb-note { max-width: 540px; }
+    .rb-card-grid { grid-template-columns: 1fr; }
+    .rb-quote-card { padding: 34px 28px; }
+  }
+
+  @media (max-width: 560px) {
+    .rb-page { padding-bottom: 56px; }
+    .rb-title { font-size: clamp(44px, 14vw, 64px); }
+    .rb-big-copy, .rb-blur-copy { font-size: clamp(30px, 10vw, 48px); }
+    .rb-quote-card p { font-size: 21px; }
+    .rb-spark-inner { padding: 32px 26px; }
+    .rb-footer { flex-direction: column; gap: 8px; }
+  }
+</style>

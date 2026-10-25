@@ -48,6 +48,7 @@ cp -a /opt/personal-blog/dist/. /opt/1panel/www/sites/spock.bbs0.cc/index/
 ## 目录结构
 
 - `src/pages/`：首页、文章列表、文章详情、标签、关于、RSS
+- `src/pages/lab/reactbits.astro`：React Bits 动效展示页（`/lab/reactbits/`）
 - `src/content/blog/`：Markdown 文章
 - `src/layouts/BaseLayout.astro`：页面骨架与主题切换
 - `src/styles/global.css`：全局样式
