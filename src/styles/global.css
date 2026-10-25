@@ -672,14 +672,6 @@ a.tag:hover { color: var(--accent); border-color: var(--accent); }
 
 /* ---------- Handwriting intro ---------- */
 
-@font-face {
-  font-family: 'Caveat';
-  src: url('/fonts/Caveat-SemiBold.woff2') format('woff2');
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-}
-
 html.intro-active,
 html.intro-active body { overflow: hidden; }
 
@@ -707,65 +699,48 @@ html.intro-active body { overflow: hidden; }
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: min(760px, 86vw);
-  min-height: 280px;
+  width: min(760px, 88vw);
+  min-height: 300px;
 }
 
 .intro-word-wrap {
   display: flex;
   justify-content: center;
-  width: 100%;
-  clip-path: inset(0 100% 0 0);
-  animation: intro-reveal 1.8s cubic-bezier(0.45, 0, 0.2, 1) 0.15s forwards;
+  width: min(660px, 84vw);
+  opacity: 0;
+  animation: intro-word-in 900ms var(--ease) 80ms forwards;
 }
 
-@keyframes intro-reveal {
-  from { clip-path: inset(0 100% 0 0); }
-  to { clip-path: inset(0 0 0 0); }
+@keyframes intro-word-in {
+  to { opacity: 1; }
 }
 
 .intro-word {
   display: block;
+  width: 100%;
   color: var(--ink);
-  font-family: 'Caveat', 'Segoe Script', 'Bradley Hand', cursive;
-  font-size: clamp(130px, 18vw, 190px);
-  font-weight: 600;
-  line-height: 0.86;
-  letter-spacing: -2px;
-  transform: rotate(-1deg);
+  transform: rotate(-1.2deg);
+}
+
+.intro-word svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
 }
 
 .intro-sub {
-  margin: 24px 0 0;
+  margin: 22px 0 0;
   color: var(--ink-3);
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.16em;
   opacity: 0;
-  animation: intro-sub 700ms ease 1.45s forwards;
+  animation: intro-sub 800ms var(--ease) 2.55s forwards;
 }
 
 @keyframes intro-sub {
   to { opacity: 1; }
-}
-
-.intro-pen {
-  position: absolute;
-  top: 52%;
-  left: 27%;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--accent);
-  opacity: 0;
-  animation: intro-pen 1.8s cubic-bezier(0.45, 0, 0.2, 1) 0.15s forwards;
-}
-
-@keyframes intro-pen {
-  0% { transform: translateX(0); opacity: 0; }
-  10% { opacity: 1; }
-  82% { opacity: 1; }
-  100% { transform: translateX(34vw); opacity: 0; }
 }
 
 .intro-skip {
@@ -787,8 +762,9 @@ html.intro-active body { overflow: hidden; }
 .intro-skip:hover { opacity: 1; color: var(--ink); }
 
 @media (max-width: 560px) {
-  .intro-stage { width: 88vw; min-height: 220px; }
-  .intro-sub { font-size: 9px; letter-spacing: 0.1em; }
+  .intro-stage { width: 90vw; min-height: 250px; }
+  .intro-word-wrap { width: 88vw; }
+  .intro-sub { margin-top: 18px; font-size: 9px; letter-spacing: 0.1em; }
   .intro-skip { right: 24px; bottom: 24px; }
 }
 

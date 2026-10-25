@@ -1,13 +1,24 @@
 ---
+import { textToSvg } from 'tegaki/core';
+import italianno from 'tegaki/fonts/italianno';
+
+// Generate the word once at build time: real stroke data, no runtime JS.
+const handwriting = textToSvg('Miles', italianno, {
+  fontSize: 220,
+  mode: 'once',
+  color: 'currentColor',
+  pressure: 0,
+  speed: 1.15,
+  timing: { deferDots: false },
+});
 ---
 
 <div class="intro-overlay" data-intro aria-hidden="true">
   <div class="intro-stage">
     <div class="intro-word-wrap">
-      <span class="intro-word">Miles</span>
+      <div class="intro-word" aria-hidden="true" set:html={handwriting}></div>
     </div>
     <p class="intro-sub">notes on code, product &amp; life</p>
-    <span class="intro-pen" aria-hidden="true"></span>
   </div>
   <button class="intro-skip" type="button" data-intro-skip>跳过</button>
 </div>
@@ -33,7 +44,7 @@
       setTimeout(() => overlay.remove(), 700);
     };
 
-    const timer = setTimeout(finish, 3200);
+    const timer = setTimeout(finish, 3900);
     overlay.querySelector('[data-intro-skip]')?.addEventListener('click', () => {
       clearTimeout(timer);
       finish();
