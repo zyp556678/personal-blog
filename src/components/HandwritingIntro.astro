@@ -1,14 +1,24 @@
 ---
 import { textToSvg } from 'tegaki/core';
-import italianno from 'tegaki/fonts/italianno';
+import caveat from 'tegaki/fonts/caveat';
+
+// Caveat's extracted "i" glyph stores the dot before the stem. Swap them so
+// the stem is drawn first, the way a hand writes it.
+const handwritingFont = structuredClone(caveat);
+const iGlyph = handwritingFont.glyphData.i;
+const [iDot, iStem] = iGlyph.s;
+iGlyph.s = [
+  { ...iStem, d: 0 },
+  { ...iDot, d: iStem.d + iStem.a },
+];
 
 // Generate the word once at build time: real stroke data, no runtime JS.
-const handwriting = textToSvg('Miles', italianno, {
+const handwriting = textToSvg('Miles', handwritingFont, {
   fontSize: 220,
   mode: 'once',
   color: 'currentColor',
   pressure: 0,
-  speed: 1.15,
+  speed: 0.8,
   timing: { deferDots: false },
 });
 ---
