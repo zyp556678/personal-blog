@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostRow from '../components/PostRow.astro';
+import { getPublishedPosts } from '../lib/posts';
+
+const posts = await getPublishedPosts();
+const latest = posts.slice(0, 4);
+---
+
+<BaseLayout
+  title="Miles Notes"
+  description="Miles Zhang 的个人博客，记录技术、产品与生活。"
+>
+  <section class="hero">
+    <div class="shell hero-grid">
+      <div>
+        <p class="eyebrow">个人博客 <span class="dot">/</span> PERSONAL NOTES</p>
+        <h1>记录技术、产品<br />与生活里<em>值得留下</em>的东西。</h1>
+        <p class="hero-lede">
+          我是 Miles Zhang，软件工程在读。这里记录项目复盘、技术笔记，以及日常里一些不成熟但真实的想法。
+        </p>
+      </div>
+
+      <aside class="hero-meta" aria-label="站点状态">
+        <div class="meta-row"><span>NOW / 状态</span><span>持续更新</span></div>
+        <div class="meta-row"><span>城市</span><span>哈尔滨 · 中国</span></div>
+        <div class="meta-row"><span>身份</span><span>软件工程在读</span></div>
+        <div class="meta-row"><span>关注</span><span>Java 后端 / 产品设计</span></div>
+        <div class="meta-row"><span>正在做</span><span>个人博客 / 项目复盘</span></div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <div class="section-head">
+        <span class="section-label">最近文章 / LATEST ENTRIES</span>
+        <a class="section-link" href="/blog/">查看全部 →</a>
+      </div>
+      <div class="post-list">
+        {latest.map((post, index) => <PostRow post={post} index={index + 1} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell about-strip">
+      <div>
+        <p class="eyebrow">关于这个站点 <span class="dot">/</span> ABOUT</p>
+        <h2>先写下来，<br />再慢慢变好。</h2>
+      </div>
+      <div>
+        <p>
+          这里没有固定的更新频率，也不打算把每篇文章都写成完整的教程。更多时候，它是一份公开的笔记本：项目结束后留下判断，学完一个东西后留下路径，遇到问题时留下排查过程。
+        </p>
+        <p>
+          如果某篇文章刚好对你有用，欢迎从 GitHub 找到我；如果发现错误，也欢迎指出来。
+        </p>
+        <p><a class="section-link" href="/about/">了解更多 →</a></p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

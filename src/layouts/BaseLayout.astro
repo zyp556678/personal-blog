@@ -1,0 +1,62 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+const {
+  title = 'Miles Notes',
+  description = 'Miles Zhang 的个人博客，记录技术、产品与生活。',
+} = Astro.props;
+
+const pageTitle = title === 'Miles Notes' ? title : `${title} · Miles Notes`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" type="application/rss+xml" title="Miles Notes RSS" href="/rss.xml" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta name="theme-color" content="#f4f1ea" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{pageTitle}</title>
+
+    <script is:inline>
+      (() => {
+        const stored = localStorage.getItem('miles-notes-theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (stored === 'dark' || (!stored && prefersDark)) {
+          document.documentElement.dataset.theme = 'dark';
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+          const button = document.querySelector('[data-theme-toggle]');
+          const label = () => {
+            if (button) button.textContent = document.documentElement.dataset.theme === 'dark' ? 'LIGHT' : 'DARK';
+          };
+          label();
+          button?.addEventListener('click', () => {
+            const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+            if (next === 'dark') document.documentElement.dataset.theme = 'dark';
+            else delete document.documentElement.dataset.theme;
+            localStorage.setItem('miles-notes-theme', next);
+            label();
+          });
+        });
+      })();
+    </script>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

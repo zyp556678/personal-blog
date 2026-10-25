@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getPublishedPosts } from '../../lib/posts';
+
+const posts = await getPublishedPosts();
+const counts = new Map();
+for (const post of posts) {
+  for (const tag of post.data.tags) counts.set(tag, (counts.get(tag) ?? 0) + 1);
+}
+const tags = [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'zh-CN'));
+---
+
+<BaseLayout title="标签" description="按标签浏览 Miles Notes 的文章。">
+  <section class="page-head">
+    <div class="shell">
+      <p class="eyebrow">Index <span class="dot">/</span> 标签</p>
+      <h1>标签</h1>
+      <p class="page-desc">按主题浏览文章。标签会随着写作慢慢长出来。</p>
+      <div class="tag-cloud">
+        {tags.map(([tag, count]) => (
+          <a class="tag" href={`/tags/${encodeURIComponent(tag)}/`}>{tag} · {count}</a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostRow from '../../components/PostRow.astro';
+import { getPublishedPosts } from '../../lib/posts';
+
+const posts = await getPublishedPosts();
+const tags = [...new Set(posts.flatMap((post) => post.data.tags))];
+---
+
+<BaseLayout
+  title="文章"
+  description="Miles Notes 的全部文章：技术笔记、项目复盘、产品设计与生活记录。"
+>
+  <section class="page-head">
+    <div class="shell">
+      <p class="eyebrow">Archive <span class="dot">/</span> 全部文章</p>
+      <h1>文章</h1>
+      <p class="page-desc">技术笔记、项目复盘、产品设计与生活记录。按时间倒序排列。</p>
+      <div class="tag-cloud">
+        {tags.map((tag) => (
+          <a class="tag" href={`/tags/${encodeURIComponent(tag)}/`}>{tag}</a>
+        ))}
+      </div>
+      <p class="count">{posts.length} 篇文章</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top: 0; border-top: 0;">
+    <div class="shell">
+      <div class="post-list">
+        {posts.map((post, index) => <PostRow post={post} index={index + 1} />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
