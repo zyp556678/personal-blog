@@ -2,33 +2,13 @@
 import { textToSvg } from 'tegaki/core';
 import caveat from 'tegaki/fonts/caveat';
 
-// Caveat's extracted "i" glyph stores the dot before the stem. Swap them so
-// the stem is drawn first, the way a hand writes it.
-const handwritingFont = structuredClone(caveat);
-const iGlyph = handwritingFont.glyphData.i;
-const [iDot, iStem] = iGlyph.s;
-iGlyph.s = [
-  { ...iStem, d: 0 },
-  { ...iDot, d: iStem.d + iStem.a },
-];
-
-// Caveat's "s" is stored bottom-to-top. Reverse the path so it is written
-// from the top down; its old nib stamp no longer lines up, so drop it.
-const sGlyph = handwritingFont.glyphData.s;
-const sStroke = sGlyph.s[0];
-sGlyph.s = [{
-  ...sStroke,
-  p: [...sStroke.p].reverse(),
-  n: undefined,
-}];
-
 // Generate the word once at build time: real stroke data, no runtime JS.
-const handwriting = textToSvg('Miles', handwritingFont, {
+const handwriting = textToSvg('welcome', caveat, {
   fontSize: 220,
   mode: 'once',
   color: 'currentColor',
   pressure: 0,
-  speed: 1.6,
+  speed: 2,
   timing: { deferDots: false },
 });
 ---
@@ -49,9 +29,9 @@ const handwriting = textToSvg('Miles', handwritingFont, {
     if (!overlay) return;
 
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduced || sessionStorage.getItem('miles-intro-seen-v4') === '1') return;
+    if (reduced || sessionStorage.getItem('miles-intro-seen-v5') === '1') return;
 
-    sessionStorage.setItem('miles-intro-seen-v4', '1');
+    sessionStorage.setItem('miles-intro-seen-v5', '1');
     document.documentElement.classList.add('intro-active');
     requestAnimationFrame(() => overlay.classList.add('is-active'));
 
