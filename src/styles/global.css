@@ -690,7 +690,7 @@ html.intro-active body { overflow: hidden; }
 .intro-overlay.is-exiting {
   opacity: 0;
   visibility: hidden;
-  transition: opacity 600ms var(--ease), visibility 600ms var(--ease);
+  transition: opacity 300ms var(--ease), visibility 300ms var(--ease);
 }
 
 .intro-stage {
@@ -708,7 +708,7 @@ html.intro-active body { overflow: hidden; }
   justify-content: center;
   width: min(660px, 84vw);
   opacity: 0;
-  animation: intro-word-in 900ms var(--ease) 80ms forwards;
+  animation: intro-word-in 300ms var(--ease) 40ms forwards;
 }
 
 @keyframes intro-word-in {
@@ -736,7 +736,7 @@ html.intro-active body { overflow: hidden; }
   font-size: 11px;
   letter-spacing: 0.16em;
   opacity: 0;
-  animation: intro-sub 800ms var(--ease) 2.55s forwards;
+  animation: intro-sub 300ms var(--ease) 1.05s forwards;
 }
 
 @keyframes intro-sub {

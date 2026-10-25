@@ -28,7 +28,7 @@ const handwriting = textToSvg('Miles', handwritingFont, {
   mode: 'once',
   color: 'currentColor',
   pressure: 0,
-  speed: 0.9,
+  speed: 1.6,
   timing: { deferDots: false },
 });
 ---
@@ -49,9 +49,9 @@ const handwriting = textToSvg('Miles', handwritingFont, {
     if (!overlay) return;
 
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduced || sessionStorage.getItem('miles-intro-seen-v3') === '1') return;
+    if (reduced || sessionStorage.getItem('miles-intro-seen-v4') === '1') return;
 
-    sessionStorage.setItem('miles-intro-seen-v3', '1');
+    sessionStorage.setItem('miles-intro-seen-v4', '1');
     document.documentElement.classList.add('intro-active');
     requestAnimationFrame(() => overlay.classList.add('is-active'));
 
@@ -61,10 +61,10 @@ const handwriting = textToSvg('Miles', handwritingFont, {
       finished = true;
       overlay.classList.add('is-exiting');
       document.documentElement.classList.remove('intro-active');
-      setTimeout(() => overlay.remove(), 700);
+      setTimeout(() => overlay.remove(), 320);
     };
 
-    const timer = setTimeout(finish, 3600);
+    const timer = setTimeout(finish, 1680);
     overlay.querySelector('[data-intro-skip]')?.addEventListener('click', () => {
       clearTimeout(timer);
       finish();
