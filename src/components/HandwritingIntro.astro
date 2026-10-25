@@ -39,9 +39,9 @@ const handwriting = textToSvg('Miles', handwritingFont, {
     if (!overlay) return;
 
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduced || sessionStorage.getItem('miles-intro-seen') === '1') return;
+    if (reduced || sessionStorage.getItem('miles-intro-seen-v2') === '1') return;
 
-    sessionStorage.setItem('miles-intro-seen', '1');
+    sessionStorage.setItem('miles-intro-seen-v2', '1');
     document.documentElement.classList.add('intro-active');
     requestAnimationFrame(() => overlay.classList.add('is-active'));
 
