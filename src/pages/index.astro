@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import HandwritingIntro from '../components/HandwritingIntro.astro';
 import PostRow from '../components/PostRow.astro';
 import { getPublishedPosts } from '../lib/posts';
 
@@ -11,6 +12,8 @@ const latest = posts.slice(0, 4);
   title="Miles Notes"
   description="Miles Zhang 的个人博客，记录技术、产品与生活。"
 >
+  <HandwritingIntro />
+
   <section class="hero">
     <div class="shell hero-grid">
       <div>

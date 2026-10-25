@@ -669,3 +669,129 @@ a.tag:hover { color: var(--accent); border-color: var(--accent); }
 
   .footer-inner { align-items: flex-start; flex-direction: column; gap: 8px; }
 }
+
+/* ---------- Handwriting intro ---------- */
+
+@font-face {
+  font-family: 'Caveat';
+  src: url('/fonts/Caveat-SemiBold.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
+html.intro-active,
+html.intro-active body { overflow: hidden; }
+
+.intro-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  place-items: center;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.intro-overlay.is-active { display: grid; }
+
+.intro-overlay.is-exiting {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 600ms var(--ease), visibility 600ms var(--ease);
+}
+
+.intro-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: min(760px, 86vw);
+  min-height: 280px;
+}
+
+.intro-word-wrap {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  clip-path: inset(0 100% 0 0);
+  animation: intro-reveal 1.8s cubic-bezier(0.45, 0, 0.2, 1) 0.15s forwards;
+}
+
+@keyframes intro-reveal {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+.intro-word {
+  display: block;
+  color: var(--ink);
+  font-family: 'Caveat', 'Segoe Script', 'Bradley Hand', cursive;
+  font-size: clamp(130px, 18vw, 190px);
+  font-weight: 600;
+  line-height: 0.86;
+  letter-spacing: -2px;
+  transform: rotate(-1deg);
+}
+
+.intro-sub {
+  margin: 24px 0 0;
+  color: var(--ink-3);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  opacity: 0;
+  animation: intro-sub 700ms ease 1.45s forwards;
+}
+
+@keyframes intro-sub {
+  to { opacity: 1; }
+}
+
+.intro-pen {
+  position: absolute;
+  top: 52%;
+  left: 27%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0;
+  animation: intro-pen 1.8s cubic-bezier(0.45, 0, 0.2, 1) 0.15s forwards;
+}
+
+@keyframes intro-pen {
+  0% { transform: translateX(0); opacity: 0; }
+  10% { opacity: 1; }
+  82% { opacity: 1; }
+  100% { transform: translateX(34vw); opacity: 0; }
+}
+
+.intro-skip {
+  position: absolute;
+  right: 40px;
+  bottom: 32px;
+  border: 0;
+  border-bottom: 1px solid var(--line-strong);
+  padding: 0 0 2px;
+  background: transparent;
+  color: var(--ink-3);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  opacity: 0.65;
+}
+
+.intro-skip:hover { opacity: 1; color: var(--ink); }
+
+@media (max-width: 560px) {
+  .intro-stage { width: 88vw; min-height: 220px; }
+  .intro-sub { font-size: 9px; letter-spacing: 0.1em; }
+  .intro-skip { right: 24px; bottom: 24px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-overlay { display: none !important; }
+}

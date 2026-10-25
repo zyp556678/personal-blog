@@ -1,0 +1,42 @@
+---
+---
+
+<div class="intro-overlay" data-intro aria-hidden="true">
+  <div class="intro-stage">
+    <div class="intro-word-wrap">
+      <span class="intro-word">Miles</span>
+    </div>
+    <p class="intro-sub">notes on code, product &amp; life</p>
+    <span class="intro-pen" aria-hidden="true"></span>
+  </div>
+  <button class="intro-skip" type="button" data-intro-skip>跳过</button>
+</div>
+
+<script is:inline>
+  (() => {
+    const overlay = document.querySelector('[data-intro]');
+    if (!overlay) return;
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced || sessionStorage.getItem('miles-intro-seen') === '1') return;
+
+    sessionStorage.setItem('miles-intro-seen', '1');
+    document.documentElement.classList.add('intro-active');
+    requestAnimationFrame(() => overlay.classList.add('is-active'));
+
+    let finished = false;
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      overlay.classList.add('is-exiting');
+      document.documentElement.classList.remove('intro-active');
+      setTimeout(() => overlay.remove(), 700);
+    };
+
+    const timer = setTimeout(finish, 3200);
+    overlay.querySelector('[data-intro-skip]')?.addEventListener('click', () => {
+      clearTimeout(timer);
+      finish();
+    });
+  })();
+</script>
